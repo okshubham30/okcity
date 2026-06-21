@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OK Varanasi | Kashi Vishwanath & BHU</title>
+<style>
+:root{
+--bg:#060e1a;--card:#15253d;--text:#f4f6f9;--cyan:#00f2fe;--orange:#ff6b08;
+}
+body.light{--bg:#f4f7fb;--card:#ffffff;--text:#10233d;--cyan:#0066ff;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:var(--bg);color:var(--text);transition:.3s}
+header{padding:20px;background:var(--card);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.logo{font-size:30px;font-weight:bold}
+.logo span{color:var(--cyan)}
+button{padding:10px 15px;border:none;border-radius:8px;cursor:pointer}
+.hero{padding:80px 20px;text-align:center}
+.hero h1{font-size:50px}
+.section{max-width:1100px;margin:auto;padding:40px 20px}
+.card{background:var(--card);padding:25px;border-radius:20px;margin-bottom:25px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.gallery img{width:100%;height:220px;object-fit:cover;border-radius:15px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">OK <span>VARANASI</span></div>
+<button onclick="document.body.classList.toggle('light')">🌙/☀️</button>
+</header>
+
+<section class="hero">
+<h1>Kashi Vishwanath Temple & BHU</h1>
+<p>Complete Overview by OK Varanasi</p>
+</section>
+
+<section class="section">
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1518002054494-3a6f94352e9d">
+<img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da">
+<img src="https://images.unsplash.com/photo-1548013146-72479768bada">
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>Kashi Vishwanath Temple</h2>
+<p>One of the most sacred Hindu temples dedicated to Lord Shiva. Located on the western bank of the Ganga River in Varanasi. The temple is one of the 12 Jyotirlingas and attracts millions of devotees every year.</p>
+<br>
+<p><b>Highlights:</b> Jyotirlinga, Ganga Aarti, Vishwanath Corridor, Spiritual Importance, Ancient History.</p>
+</div>
+
+<div class="card">
+<h2>Banaras Hindu University (BHU)</h2>
+<p>BHU is one of India's largest and most prestigious universities. Founded by Pandit Madan Mohan Malaviya in 1916, it offers education in science, engineering, medicine, arts, agriculture and more.</p>
+<br>
+<p><b>Highlights:</b> IIT BHU, Bharat Kala Bhavan, Vishwanath Temple, Huge Campus, Research Excellence.</p>
+</div>
+</section>
+
+<script>
+console.log("OK Varanasi Loaded");
+</script>
+</body>
+</html>
