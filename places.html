@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OK Varanasi | Places</title>
+  <meta name="description" content="Explore top places in Varanasi with clickable cards and detailed individual pages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    :root {
+      --bg: #060e1a;
+      --bg2: #0a192f;
+      --card: #15253d;
+      --text: #f4f6f9;
+      --muted: #8a95ac;
+      --cyan: #00f2fe;
+      --saffron: #ff6b08;
+      --gold: #ffd56b;
+      --border: rgba(0, 242, 254, 0.16);
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    body.light {
+      --bg: #f4f7fb;
+      --bg2: #ffffff;
+      --card: #ffffff;
+      --text: #10233d;
+      --muted: #5f6f87;
+      --cyan: #0066ff;
+      --saffron: #ff7a1a;
+      --gold: #b8860b;
+      --border: rgba(0, 102, 255, 0.16);
+      --shadow: 0 18px 45px rgba(20, 40, 80, 0.10);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-ok {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .logo-varanasi {
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-left: 2px solid var(--saffron);
+      padding-left: 10px;
+      line-height: 1.05;
+    }
+
+    .logo-varanasi span {
+      color: var(--saffron);
+      font-size: 0.62rem;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      opacity: 0.85;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cyan);
+      opacity: 1;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+    }
+
+    .hero {
+      padding: 84px 0 40px;
+      background:
+        radial-gradient(circle at top, rgba(0, 242, 254, 0.12), transparent 35%),
+        linear-gradient(180deg, rgba(10,25,47,0.45), transparent);
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 107, 8, 0.12);
+      border: 1px solid rgba(255, 107, 8, 0.25);
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.02rem;
+    }
+
+    .search-wrap {
+      max-width: 720px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 14px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .search-wrap i {
+      color: var(--muted);
+    }
+
+    .search-wrap input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .search-wrap input::placeholder {
+      color: var(--muted);
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .filter-btn {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--saffron), var(--cyan));
+      color: #fff;
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    .section-head {
+      text-align: center;
+      margin: 30px 0 26px;
+    }
+
+    .section-head h2 {
+      font-family: 'Marcellus', serif;
+      font-size: 2.15rem;
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 22px;
+      padding-bottom: 70px;
+    }
+
+    a.card {
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.28s ease;
+      display: block;
+    }
+
+    a.card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(0, 242, 254, 0.25);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      margin-bottom: 12px;
+      background: rgba(0,242,254,0.12);
+      color: var(--cyan);
+      letter-spacing: 0.5px;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      min-height: 52px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 14px;
+    }
+
+    .meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 0 20px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .footer h3 {
+      color: var(--text);
+      font-family: 'Marcellus', serif;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .footer p,
+    .footer a {
+      color: var(--muted);
+      line-height: 1.7;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--cyan);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 16px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted);
+      padding: 40px 0;
+      font-size: 1.05rem;
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 180px;
+      }
+
+      .meta {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo" aria-label="OK Varanasi Home">
+        <div class="logo-ok">OK</div>
+        <div class="logo-varanasi">
+          VARANASI
+          <span>City of Light</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="places.html" class="active">Places</a>
+        <a href="index.html#contact">Contact</a>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle bright/dark mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <i class="fa-solid fa-location-dot"></i> Explore Varanasi
+      </div>
+      <h1>Places to Visit in Varanasi</h1>
+      <p>
+        Click any card to open a full detailed page. Each place opens as a separate link.
+      </p>
+
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search places like Assi Ghat, Sarnath, Temple..." />
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ghat">Ghats</button>
+        <button class="filter-btn" data-filter="temple">Temples</button>
+        <button class="filter-btn" data-filter="historical">Historical</button>
+        <button class="filter-btn" data-filter="food">Food</button>
+        <button class="filter-btn" data-filter="market">Markets</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="section-head">
+      <h2>Popular Places</h2>
+      <p>Every card is a clickable link to its own detail page.</p>
+    </section>
+
+    <section class="grid" id="placesGrid"></section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>OK Varanasi</h3>
+          <p>
+            A local directory and travel guide for Varanasi. Explore temples, ghats, food, markets, hotels, and cultural places in one place.
+          </p>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="places.html">Places</a>
+            <a href="index.html#food">Food</a>
+            <a href="index.html#directory">Directory</a>
+          </div>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <p>Email: explore@okvaranasi.com</p>
+          <p>Phone: +91 542 240 5511</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 OK Varanasi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const PLACES = [
+      {
+        name: "Kashi Vishwanath Temple",
+        category: "temple",
+        image: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.9,
+        location: "Lahori Tola, Varanasi",
+        short: "One of the holiest Shiva temples and a major spiritual destination.",
+        link: "place-details/kashi-vishwanath.html"
+      },
+      {
+        name: "Dashashwamedh Ghat",
+        category: "ghat",
+        image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.9,
+        location: "Near Kashi Vishwanath, Varanasi",
+        short: "Famous for the grand Ganga Aarti and river views.",
+        link: "place-details/dashashwamedh-ghat.html"
+      },
+      {
+        name: "Assi Ghat",
+        category: "ghat",
+        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.8,
+        location: "Assi, Varanasi",
+        short: "Popular for sunrise, yoga, cultural events, and boat rides.",
+        link: "place-details/assi-ghat.html"
+      },
+      {
+        name: "Sarnath",
+        category: "historical",
+        image: "https://images.unsplash.com/photo-1564507004663-b6dfb3c824d5?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.8,
+        location: "Sarnath, Varanasi",
+        short: "A sacred Buddhist site where Buddha gave his first sermon.",
+        link: "place-details/sarnath.html"
+      },
+      {
+        name: "Manikarnika Ghat",
+        category: "ghat",
+        image: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.6,
+        location: "Near Chowk, Varanasi",
+        short: "One of the most sacred cremation ghats in India.",
+        link: "place-details/manikarnika-ghat.html"
+      },
+      {
+        name: "Ramnagar Fort",
+        category: "historical",
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.4,
+        location: "Ramnagar, opposite Varanasi",
+        short: "A historic fort with a museum and royal collection.",
+        link: "place-details/ramnagar-fort.html"
+      },
+      {
+        name: "Godowlia Market",
+        category: "market",
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.5,
+        location: "Godowlia, Varanasi",
+        short: "Busy shopping area for clothes, gifts, sweets, and local items.",
+        link: "place-details/godowlia-market.html"
+      },
+      {
+        name: "Banarasi Street Food",
+        category: "food",
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=80",
+        rating: 4.9,
+        location: "Chowk / Godowlia area",
+        short: "Famous for kachori, tamatar chaat, lassi, and paan.",
+        link: "place-details/banarasi-street-food.html"
+      }
+    ];
+
+    const grid = document.getElementById("placesGrid");
+    const searchInput = document.getElementById("searchInput");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const themeToggle = document.getElementById("themeToggle");
+    let activeFilter = "all";
+
+    function renderPlaces(list) {
+      grid.innerHTML = "";
+
+      if (!list.length) {
+        grid.innerHTML = `<div class="empty">No places found. Try another keyword or filter.</div>`;
+        return;
+      }
+
+      list.forEach(place => {
+        const card = document.createElement("a");
+        card.className = "card";
+        card.href = place.link;
+        card.innerHTML = `
+          <img src="${place.image}" alt="${place.name}">
+          <div class="card-body">
+            <span class="badge">${place.category.toUpperCase()}</span>
+            <h3>${place.name}</h3>
+            <p>${place.short}</p>
+            <div class="meta">
+              <span><i class="fa-solid fa-star"></i> ${place.rating}</span>
+              <span><i class="fa-solid fa-location-dot"></i> ${place.location}</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterPlaces() {
+      const query = searchInput.value.trim().toLowerCase();
+
+      const filtered = PLACES.filter(place => {
+        const textMatch =
+          place.name.toLowerCase().includes(query) ||
+          place.short.toLowerCase().includes(query) ||
+          place.location.toLowerCase().includes(query) ||
+          place.category.toLowerCase().includes(query);
+
+        const categoryMatch = activeFilter === "all" || place.category === activeFilter;
+        return textMatch && categoryMatch;
+      });
+
+      renderPlaces(filtered);
+    }
+
+    searchInput.addEventListener("input", filterPlaces);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        filterPlaces();
+      });
+    });
+
+    function applyTheme(theme) {
+      document.body.classList.toggle("light", theme === "light");
+      themeToggle.innerHTML = theme === "light"
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+      localStorage.setItem("okvaranasi-theme", theme);
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const isLight = document.body.classList.contains("light");
+      applyTheme(isLight ? "dark" : "light");
+    });
+
+    const savedTheme = localStorage.getItem("okvaranasi-theme") || "dark";
+    applyTheme(savedTheme);
+
+    renderPlaces(PLACES);
+  </script>
+  <script src="theme.js"></script>
+</body>
+</html>

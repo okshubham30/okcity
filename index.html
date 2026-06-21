@@ -1,775 +1,565 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OK VARANASI | Explore Banaras</title>
-  <meta name="description" content="OK VARANASI is a modern city guide for Varanasi with tourist places, colleges, coaching, hospitals, hostels, PG, rent, restaurants, hotels, and local services." />
-  <style>
-    :root {
-      --bg: #050816;
-      --panel: rgba(10, 16, 33, 0.72);
-      --panel-strong: rgba(12, 20, 42, 0.94);
-      --line: rgba(255,255,255,0.10);
-      --text: #eff4ff;
-      --muted: #a9b6cf;
-      --accent: #00d4ff;
-      --accent2: #7c5cff;
-      --good: #69f0b6;
-      --shadow: 0 18px 60px rgba(0,0,0,0.35);
-      --radius: 24px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(0,212,255,0.14), transparent 28%),
-        radial-gradient(circle at top right, rgba(124,92,255,0.16), transparent 24%),
-        linear-gradient(180deg, #040711 0%, #09101f 100%);
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .container {
-      width: min(1180px, calc(100% - 24px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(4, 8, 16, 0.72);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-    }
-
-    .brand-badge {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #03111b;
-      box-shadow: 0 0 28px rgba(0,212,255,0.35);
-      font-weight: 900;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .nav-links a {
-      padding: 10px 14px;
-      color: var(--muted);
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: 0.25s ease;
-    }
-
-    .nav-links a:hover {
-      background: rgba(0,212,255,0.08);
-      border-color: rgba(0,212,255,0.22);
-      color: var(--text);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border: none;
-      cursor: pointer;
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #03111b;
-      font-weight: 700;
-      box-shadow: 0 14px 35px rgba(0,212,255,0.18);
-      transition: transform 0.25s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .ghost {
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: none;
-    }
-
-    .hero {
-      padding: 34px 0 18px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-left {
-      padding: 34px;
-      position: relative;
-      min-height: 520px;
-      isolation: isolate;
-    }
-
-    .hero-left::before,
-    .hero-left::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      pointer-events: none;
-      filter: blur(12px);
-      opacity: 0.7;
-      z-index: -1;
-    }
-
-    .hero-left::before {
-      width: 220px;
-      height: 220px;
-      right: -60px;
-      top: -40px;
-      background: radial-gradient(circle, rgba(0,212,255,0.34), transparent 68%);
-    }
-
-    .hero-left::after {
-      width: 180px;
-      height: 180px;
-      left: -50px;
-      bottom: -60px;
-      background: radial-gradient(circle, rgba(124,92,255,0.28), transparent 70%);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      color: var(--good);
-      font-size: 0.92rem;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.4rem, 5.4vw, 5rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, var(--accent), #ffffff 45%, var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-left p {
-      margin: 18px 0 24px;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 1.04rem;
-      max-width: 60ch;
-    }
-
-    .searchbar {
-      display: flex;
-      gap: 10px;
-      padding: 10px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      max-width: 760px;
-    }
-
-    .searchbar input {
-      flex: 1;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      padding: 10px 12px;
-      font-size: 1rem;
-    }
-
-    .searchbar input::placeholder { color: #8f9bb7; }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .metric {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-    }
-
-    .metric span {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .hero-right {
-      display: grid;
-      gap: 14px;
-    }
-
-    .right-top {
-      padding: 22px;
-    }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-      font-size: 1.45rem;
-    }
-
-    .section-title p, .right-top p, .card p, .info p, .footer p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .mini-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 15px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .mini-item small {
-      display: block;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .pill {
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(0,212,255,0.12);
-      color: var(--accent);
-      font-size: 0.82rem;
-      white-space: nowrap;
-    }
-
-    .floating {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .floating .card {
-      padding: 18px;
-      background: var(--panel-strong);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-    }
-
-    .icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      margin-bottom: 12px;
-      background: rgba(0,212,255,0.10);
-      color: var(--accent);
-      font-size: 1.2rem;
-    }
-
-    .section {
-      padding: 18px 0 8px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .card {
-      padding: 18px;
-      background: var(--panel-strong);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(0,212,255,0.22);
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 1.05rem;
-    }
-
-    .cards-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .spot {
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .spot-image {
-      height: 190px;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.55)),
-        radial-gradient(circle at top, rgba(0,212,255,0.20), transparent 40%),
-        linear-gradient(135deg, #243250, #111a2d 58%, #0a1020);
-      position: relative;
-    }
-
-    .spot-image span {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      font-size: 0.88rem;
-    }
-
-    .spot-body {
-      padding: 18px;
-    }
-
-    .meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .meta strong { color: var(--good); }
-
-    .cta {
-      margin: 26px 0 48px;
-      padding: 24px;
-      border-radius: 28px;
-      background: linear-gradient(135deg, rgba(0,212,255,0.16), rgba(124,92,255,0.14));
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .cta h2 { margin: 0 0 8px; font-size: 1.5rem; }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 22px 0 34px;
-      color: var(--muted);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      gap: 16px;
-    }
-
-    .footer-grid h4 {
-      color: var(--text);
-      margin: 0 0 10px;
-    }
-
-    .footer-grid a {
-      display: block;
-      padding: 6px 0;
-      color: var(--muted);
-    }
-
-    .footer-grid a:hover { color: var(--text); }
-
-    .copyright {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-      text-align: center;
-      font-size: 0.92rem;
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid, .grid-4, .cards-3, .footer-grid { grid-template-columns: 1fr 1fr; }
-      .hero-left { min-height: auto; }
-    }
-
-    @media (max-width: 720px) {
-      .nav { flex-direction: column; align-items: stretch; }
-      .nav-links { justify-content: flex-start; overflow-x: auto; padding-bottom: 4px; }
-      .hero-grid, .grid-4, .cards-3, .footer-grid, .floating, .metrics { grid-template-columns: 1fr; }
-      .hero-left, .right-top, .cta { padding: 20px; }
-      .searchbar { flex-direction: column; }
-      .searchbar .btn { width: 100%; }
-      h1 { font-size: 2.35rem; }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>OK Varanasi - Local Directory & Travel Guide to Varanasi City</title>
+  <meta name="description" content="Discover Varanasi (Kashi), the spiritual capital of India. Explore top attractions (Ghats, Temples), local food trails, upcoming cultural events, travel guides, and a comprehensive local business directory.">
+  <meta name="keywords" content="Varanasi, Kashi, Ghats, Temples, Ganga Aarti, Assi Ghat, Kashi Vishwanath, Banaras, Local Directory, Varanasi Guide">
+  
+  <!-- Google Fonts & Icon Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="brand-badge">V</div>
-        <div>
-          <div>OK VARANASI</div>
-          <small style="color: var(--muted); font-weight: 500;">Explore Banaras, Kashi, and Sarnath</small>
+
+  <!-- Header Navigation -->
+  <header id="main-header">
+    <div class="container nav-container">
+      <a href="#" class="logo" id="header-logo">
+        <div class="logo-ok">OK</div>
+        <div class="logo-varanasi">
+          VARANASI
+          <span class="logo-tagline">CITY OF LIGHT</span>
         </div>
+      </a>
+      
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item"><a href="#home">Home</a></li>
+          <li class="nav-item"><a href="#explore">Explore</a></li>
+          <li class="nav-item"><a href="places.html">Places to Visit</a></li>
+          <li class="nav-item"><a href="#food">Food Trail</a></li>
+          <li class="nav-item"><a href="#directory">Directory</a></li>
+          <li class="nav-item"><a href="#contact">Contact Us</a></li>
+          <li class="nav-item mobile-only-action">
+            <button class="btn btn-primary" id="list-business-btn-mobile" style="width: 100%; margin-top: 1.5rem;">
+              <i class="fa-solid fa-plus"></i> List Business
+            </button>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="btn btn-secondary btn-icon" id="quick-search-trigger" title="Quick Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <button class="btn btn-secondary btn-icon" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+       <i class="fa-solid fa-moon"></i>
+       </button> 
+        <button class="btn btn-primary" id="list-business-btn-nav">
+          <i class="fa-solid fa-plus"></i> List Business
+        </button>
       </div>
 
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#categories">Categories</a>
-        <a href="#featured">Featured</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <a class="btn" href="#contact">Add Listing</a>
+      
+      
+      <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="panel hero-left">
-          <div class="badge">🌸 Welcome to the spiritual city of India</div>
-          <h1>Discover <span class="gradient-text">Varanasi</span> in one powerful city guide.</h1>
-          <p>
-            Find famous ghats, temples, colleges, coaching institutes, hospitals, hostels, PGs, hotels, restaurants, shopping areas, and local businesses across Varanasi.
-          </p>
-
-          <div class="searchbar" role="search">
-            <input id="searchInput" type="text" placeholder="Search Kashi Vishwanath, BHU, Assi Ghat, Sarnath..." aria-label="Search Varanasi listings" />
-            <button class="btn" id="searchBtn" type="button">Search</button>
-          </div>
-
-          <div class="hero-actions">
-            <a class="btn" href="#featured">Explore Now</a>
-            <a class="btn ghost" href="#services">See Services</a>
-          </div>
-
-          <div class="metrics">
-            <div class="metric"><strong>200+</strong><span>local listings</span></div>
-            <div class="metric"><strong>Fast</strong><span>mobile-first layout</span></div>
-            <div class="metric"><strong>Earn</strong><span>with featured pages</span></div>
-          </div>
-        </div>
-
-        <aside class="hero-right">
-          <div class="panel right-top">
-            <h2>Popular in Varanasi</h2>
-            <p>These pages are the most searched and most useful.</p>
-            <div class="mini-list">
-              <div class="mini-item"><div><strong>Kashi Vishwanath Temple</strong><small>One of the most famous temples</small></div><span class="pill">Top</span></div>
-              <div class="mini-item"><div><strong>Dashashwamedh Ghat</strong><small>Popular for Ganga Aarti</small></div><span class="pill">Hot</span></div>
-              <div class="mini-item"><div><strong>Banaras Hindu University</strong><small>Major university in the city</small></div><span class="pill">Popular</span></div>
-            </div>
-          </div>
-
-          <div class="floating">
-            <div class="card">
-              <div class="icon">🏛️</div>
-              <h3>Tourism</h3>
-              <p>Show ghats, temples, heritage spots, and travel info.</p>
-            </div>
-            <div class="card">
-              <div class="icon">💼</div>
-              <h3>Business</h3>
-              <p>Sell featured listings to local businesses and institutes.</p>
-            </div>
-          </div>
-        </aside>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-glow-tag">
+        <i class="fa-solid fa-dharmachakra"></i> Spiritual Capital of India
       </div>
-    </section>
-
-    <section class="section" id="categories">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Categories</h2>
-            <p>Everything a person searches in Varanasi.</p>
-          </div>
-        </div>
-
-        <div class="grid-4" id="categoryGrid">
-          <article class="card category" data-name="tourist places temples ghats heritage sarnath">
-            <div class="icon">🗺️</div>
-            <h3>Tourist Places</h3>
-            <p>Kashi Vishwanath, ghats, Sarnath, forts, and famous local attractions.</p>
-          </article>
-          <article class="card category" data-name="colleges universities bhu iit bhu education">
-            <div class="icon">🎓</div>
-            <h3>Colleges</h3>
-            <p>Banaras Hindu University, IIT BHU, and other educational institutions.</p>
-          </article>
-          <article class="card category" data-name="coaching classes institutes jee neet upsc exams">
-            <div class="icon">📘</div>
-            <h3>Coaching</h3>
-            <p>JEE, NEET, UPSC, CUET, and school coaching institutes.</p>
-          </article>
-          <article class="card category" data-name="hospital clinic doctor medical emergency treatment">
-            <div class="icon">🏥</div>
-            <h3>Hospitals</h3>
-            <p>Hospitals, clinics, emergency care, and doctor contacts.</p>
-          </article>
-          <article class="card category" data-name="hostels pg boys girls rooms stay students">
-            <div class="icon">🏠</div>
-            <h3>Hostels & PG</h3>
-            <p>Student hostels, PGs, and room options near colleges and coaching.</p>
-          </article>
-          <article class="card category" data-name="homes for rent flats apartments family rooms">
-            <div class="icon">🔑</div>
-            <h3>Homes for Rent</h3>
-            <p>Family homes, flats, apartments, and rental rooms.</p>
-          </article>
-          <article class="card category" data-name="restaurants hotels food dhaba cafe bhojanalaya">
-            <div class="icon">🍽️</div>
-            <h3>Restaurants & Hotels</h3>
-            <p>Food places, hotels, cafes, and budget stays.</p>
-          </article>
-          <article class="card category" data-name="shopping malls markets showrooms shops godowlia lanka">
-            <div class="icon">🛍️</div>
-            <h3>Shopping & Markets</h3>
-            <p>Godowlia, Lanka, showrooms, and local shopping areas.</p>
-          </article>
+      <h2>Experience Kashi,<br><span>Where Time Stands Still</span></h2>
+      <p class="hero-description">
+        Explore ancient temples, sacred ghats, vibrant local food stalls, and cultural events. Register and support local businesses in the heart of Banaras.
+      </p>
+      
+      <!-- Hero Search Engine -->
+      <div class="hero-search-wrapper">
+        <div class="hero-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="main-search-input" placeholder="Search temples, ghats, famous lassi, hotels...">
+          <button class="btn btn-primary" id="main-search-btn">Search</button>
         </div>
       </div>
-    </section>
-
-    <section class="section" id="featured">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Featured Varanasi pages</h2>
-            <p>These pages can bring the most traffic.</p>
-          </div>
-          <a class="btn ghost" href="#contact">Sponsor a page</a>
-        </div>
-
-        <div class="cards-3">
-          <article class="card spot">
-            <div class="spot-image"><span>Tourism</span></div>
-            <div class="spot-body">
-              <h3>Top Tourist Places in Varanasi</h3>
-              <p>Build detailed pages for Kashi Vishwanath Temple, Dashashwamedh Ghat, Assi Ghat, Sarnath, Manikarnika Ghat, Tulsi Ghat, and Ramnagar Fort.</p>
-              <div class="meta"><span>High search value</span><strong>Best for SEO</strong></div>
-            </div>
-          </article>
-
-          <article class="card spot">
-            <div class="spot-image"><span>Education</span></div>
-            <div class="spot-body">
-              <h3>Colleges & Coaching in Varanasi</h3>
-              <p>Include Banaras Hindu University, IIT BHU, Mahatma Gandhi Kashi Vidyapith, Sampurnanand Sanskrit University, and coaching institutes.</p>
-              <div class="meta"><span>Lead generation</span><strong>Good revenue</strong></div>
-            </div>
-          </article>
-
-          <article class="card spot">
-            <div class="spot-image"><span>Business</span></div>
-            <div class="spot-body">
-              <h3>Rent, PG & Local Business</h3>
-              <p>Post hostels, PGs, rooms, flats, hotels, restaurants, shops, showrooms, and service providers from all major areas.</p>
-              <div class="meta"><span>Monetizable</span><strong>Paid listings</strong></div>
-            </div>
-          </article>
-        </div>
+      
+      <div class="hero-actions">
+        <a href="#places" class="btn btn-primary">Explore Places <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#directory" class="btn btn-secondary">Local Directory</a>
       </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Important areas in Varanasi</h2>
-            <p>Use these locations to create area-based pages and stronger SEO.</p>
-          </div>
+      
+      <!-- Quick Counters -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">84+</div>
+          <div class="stat-label">Sacred Ghats</div>
         </div>
-
-        <div class="cards-3">
-          <div class="card">
-            <div class="icon">📍</div>
-            <h3>Old City</h3>
-            <p>Kashi Vishwanath corridor, Godowlia, Dashashwamedh, and nearby lanes.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🎒</div>
-            <h3>Lanka & BHU Area</h3>
-            <p>Best for colleges, hostels, PG, coaching, cafes, and student services.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🚉</div>
-            <h3>Cantonment & Transit</h3>
-            <p>Railway station area, transport access, hotels, and short-stay options.</p>
-          </div>
+        <div class="stat-item">
+          <div class="stat-number">2,000+</div>
+          <div class="stat-label">Historic Temples</div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Why this design works</h2>
-            <p>Simple, clean, and ready to grow into a business.</p>
-          </div>
+        <div class="stat-item">
+          <div class="stat-number">365</div>
+          <div class="stat-label">Days of Ganga Aarti</div>
         </div>
-
-        <div class="cards-3">
-          <div class="card">
-            <div class="icon">⚡</div>
-            <h3>Fast layout</h3>
-            <p>Visitors can search and open pages without confusion.</p>
-          </div>
-          <div class="card">
-            <div class="icon">📱</div>
-            <h3>Mobile responsive</h3>
-            <p>Looks good on phones, tablets, laptops, and large screens.</p>
-          </div>
-          <div class="card">
-            <div class="icon">💰</div>
-            <h3>Income ready</h3>
-            <p>Add sponsored listings, ad spaces, and premium pages later.</p>
-          </div>
+        <div class="stat-item" id="active-businesses-counter">
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Registered Listings</div>
         </div>
-      </div>
-    </section>
-
-    <section class="container">
-      <div class="cta" id="contact">
-        <div>
-          <h2>Want the next page for Varanasi sections?</h2>
-          <p style="margin:0; color: var(--muted);">I can create separate pages for tourist places, colleges, hospitals, PG, and rent.</p>
-        </div>
-        <a class="btn" href="mailto:yourmail@example.com">Contact Us</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer">
-        <h4>OK VARANASI</h4>
-        <p>Your complete guide to Varanasi. Discover tourist places, education, healthcare, accommodation, shopping, and local businesses.</p>
-      </div>
-      <div>
-        <h4>Pages</h4>
-        <a href="#categories">Categories</a>
-        <a href="#featured">Featured Pages</a>
-        <a href="#services">Services</a>
-      </div>
-      <div>
-        <h4>Business</h4>
-        <a href="#contact">Add Listing</a>
-        <a href="#contact">Sponsored Page</a>
-        <a href="#contact">Banner Ad</a>
       </div>
     </div>
-    <div class="container copyright">© 2026 OK VARANASI. Built for a Varanasi city guide website.</div>
+  </section>
+
+  <!-- Explore & Cultural Calendar Section -->
+  <section class="explore-section" id="explore">
+    <div class="container">
+      <h2 class="section-title">Explore Cultural Events</h2>
+      <p class="section-subtitle">Varanasi is a celebration of life, faith, and music. Participate in daily spiritual rituals and grand cultural festivals.</p>
+      
+      <div class="explore-grid">
+        <div class="explore-visual">
+          <img src="assets/varanasi_ghats.png" alt="Subah-e-Banaras Morning View">
+          <div class="explore-visual-overlay">
+            <span class="explore-tag">Featured Experience</span>
+            <h3>Subah-e-Banaras</h3>
+            <p>A spiritual dawn ceremony at Assi Ghat featuring Ganga Aarti, Vedic chanting, and classical music performances that welcomes the morning sun.</p>
+          </div>
+        </div>
+        
+        <div class="event-list">
+          <div class="event-card" data-event="ganga-aarti">
+            <div class="event-date">
+              <span class="day">Daily</span>
+              <span class="month">Sunset</span>
+            </div>
+            <div class="event-details">
+              <h4>Maha Ganga Aarti</h4>
+              <p>Witness the grandiose ritual of worship at Dashashwamedh Ghat performed by young priests with rhythmic brass lamps and conch shells.</p>
+              <div class="event-time">
+                <i class="fa-regular fa-clock"></i> 6:30 PM - 7:30 PM (Varies slightly by season)
+              </div>
+            </div>
+          </div>
+          
+          <div class="event-card" data-event="dev-deepawali">
+            <div class="event-date">
+              <span class="day">15</span>
+              <span class="month">Nov</span>
+            </div>
+            <div class="event-details">
+              <h4>Dev Deepawali (Festival of Gods)</h4>
+              <p>The night when millions of clay lamps (diyas) light up all 84 ghats, celebrating the victory of Lord Shiva over demon Tripurasura.</p>
+              <div class="event-time">
+                <i class="fa-solid fa-calendar-days"></i> Kartik Poornima Night (Annual Celebration)
+              </div>
+            </div>
+          </div>
+          
+          <div class="event-card" data-event="mahashivratri">
+            <div class="event-date">
+              <span class="day">Feb</span>
+              <span class="month">Mar</span>
+            </div>
+            <div class="event-details">
+              <h4>Maha Shivratri Procession</h4>
+              <p>Experience the grand Shiv Baraat parade passing through the lanes of Banaras leading to the golden Kashi Vishwanath Temple.</p>
+              <div class="event-time">
+                <i class="fa-solid fa-calendar-days"></i> Annual Spring Festival
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Places to Visit Section -->
+  <section class="places-section" id="places">
+    <div class="container">
+      <h2 class="section-title">Places to Visit</h2>
+      <p class="section-subtitle">From ancient ghats washing away sins to historical sites outlining India's golden heritage.</p>
+      
+      <!-- Filter Tabs -->
+      <div class="places-filters">
+        <button class="filter-btn active" data-filter="all">All Places</button>
+        <button class="filter-btn" data-filter="ghats">Ghats</button>
+        <button class="filter-btn" data-filter="temples">Temples</button>
+        <button class="filter-btn" data-filter="historical">Historic Sites</button>
+      </div>
+      
+      <!-- Place Cards Grid -->
+      <div class="places-grid" id="places-grid">
+        <!-- Rendered dynamically by JavaScript to support details & search -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Food Trail Section -->
+  <section class="food-section" id="food">
+    <div class="container">
+      <h2 class="section-title">Varanasi Food Trail</h2>
+      <p class="section-subtitle">Savor the unique street delicacies of Banaras. A blend of fiery chaats, sweet creamy lassis, and the legendary paan.</p>
+      
+      <div class="food-grid">
+        <!-- Event List acting as Food Menu -->
+        <div class="food-menu-list">
+          <div class="food-item active" data-img="assets/varanasi_food.png" data-food="lassi">
+            <div class="food-header">
+              <h4>Banarasi Makkhani Lassi</h4>
+              <span class="food-tag">Sweet & Rich</span>
+            </div>
+            <p>Creamy yogurt whisked to perfection, served in eco-friendly clay pots (kulhads), loaded with malai (cream), dry fruits, and aromatic saffron syrup.</p>
+            <div class="food-places">
+              <i class="fa-solid fa-map-pin"></i> Famous spots: Blue Lassi Shop, Pahalwan Lassi
+            </div>
+          </div>
+          
+          <div class="food-item" data-img="chaat-showcase" data-food="chaat">
+            <div class="food-header">
+              <h4>Kashi Tamatar Chaat</h4>
+              <span class="food-tag">Tangy & Spicy</span>
+            </div>
+            <p>Varanasi's custom creation: Spicy mashed tomatoes, boiled potatoes, loaded with local spices, ghee, lemon juice, and topped with crispy sev and sugar syrup.</p>
+            <div class="food-places">
+              <i class="fa-solid fa-map-pin"></i> Famous spots: Deena Chaat Bhandar, Kashi Chat Bhandar
+            </div>
+          </div>
+          
+          <div class="food-item" data-img="kachori-showcase" data-food="kachori">
+            <div class="food-header">
+              <h4>Kachori Sabzi & Jalebi</h4>
+              <span class="food-tag">Hearty Breakfast</span>
+            </div>
+            <p>Crispy lentil-stuffed kachoris served with a spicy potato curry (aaloo ki sabzi) seasoned with asafoetida, paired with hot, crispy, syrup-loaded jalebis.</p>
+            <div class="food-places">
+              <i class="fa-solid fa-map-pin"></i> Famous spots: Ram Bhandar, Chachi Ki Dukan
+            </div>
+          </div>
+          
+          <div class="food-item" data-img="paan-showcase" data-food="paan">
+            <div class="food-header">
+              <h4>Banarasi Paan</h4>
+              <span class="food-tag">Legendary Finish</span>
+            </div>
+            <p>Betel leaf folded with gulkand (rose petal preserve), sweet fennel, grated coconut, dates, and select herbs. An iconic post-meal custom celebrated in songs.</p>
+            <div class="food-places">
+              <i class="fa-solid fa-map-pin"></i> Famous spots: Keshav Tambul, Rajendra Chaurasia Paan
+            </div>
+          </div>
+        </div>
+
+        <div class="food-showcase">
+          <img src="assets/varanasi_food.png" id="food-showcase-img" alt="Varanasi Food Delicacy">
+          <div class="food-showcase-overlay">
+            <h3 id="food-showcase-title">Banarasi Makkhani Lassi</h3>
+            <p id="food-showcase-desc">Creamy yogurt whisked to perfection, served in eco-friendly clay pots, loaded with fresh malai and nuts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Business Directory Section -->
+  <section class="directory-section" id="directory">
+    <div class="container">
+      <h2 class="section-title">Local Directory</h2>
+      <p class="section-subtitle">Find verified local businesses, premium accommodations, experienced guides, and authentic handloom stores.</p>
+      
+      <!-- Directory Control bar -->
+      <div class="directory-controls">
+        <div class="directory-search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="dir-search-input" placeholder="Search businesses by name, tag or service...">
+        </div>
+        
+        <div class="directory-filters-container">
+          <button class="dir-filter-btn active" data-category="all">All Services</button>
+          <button class="dir-filter-btn" data-category="hotels">Hotels</button>
+          <button class="dir-filter-btn" data-category="food">Dining</button>
+          <button class="dir-filter-btn" data-category="handlooms">Handloom & Crafts</button>
+          <button class="dir-filter-btn" data-category="guides">Guides & Tours</button>
+          <button class="dir-filter-btn" data-category="wellness">Yoga & Wellness</button>
+        </div>
+      </div>
+      
+      <!-- Directory Grid -->
+      <div class="directory-grid" id="directory-grid">
+        <!-- Content will be injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel Guides & Itineraries Section -->
+  <section class="guides-section" id="guides">
+    <div class="container">
+      <h2 class="section-title">Travel Guides & Routes</h2>
+      <p class="section-subtitle">Get the most out of your visit to Banaras with these custom, hand-crafted tour itineraries.</p>
+      
+      <div class="guides-grid">
+        <!-- Guide Card 1 -->
+        <div class="guide-card">
+          <div class="guide-banner">
+            <img src="assets/varanasi_ghats.png" alt="24 Hours Varanasi Guide">
+            <span class="guide-duration">24-Hour Express</span>
+          </div>
+          <div class="guide-card-content">
+            <h3>The Spiritual Trail</h3>
+            <p>An action-packed day capturing the raw spirit, daily ceremonies, and key heritage monuments of Varanasi.</p>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <span class="guide-step-num">1</span>
+                <span class="guide-step-text"><strong>05:30 AM:</strong> Sunrise & Morning Aarti at Assi Ghat.</span>
+              </div>
+              <div class="guide-step">
+                <span class="guide-step-num">2</span>
+                <span class="guide-step-text"><strong>09:00 AM:</strong> Kashi Vishwanath Darshan & old lane walk.</span>
+              </div>
+              <div class="guide-step">
+                <span class="guide-step-num">3</span>
+                <span class="guide-step-text"><strong>01:30 PM:</strong> Explore Sarnath archaeological gardens.</span>
+              </div>
+              <div class="guide-step">
+                <span class="guide-step-num">4</span>
+                <span class="guide-step-text"><strong>06:00 PM:</strong> Dashashwamedh Ghat boat ride & Ganga Aarti.</span>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-full-width" id="read-guide-spiritual">View Route Map</button>
+          </div>
+        </div>
+
+        <!-- Guide Card 2 -->
+        <div class="guide-card">
+          <div class="guide-banner">
+            <img src="assets/varanasi_food.png" alt="Food Trail Guide">
+            <span class="guide-duration">Foodie's Day</span>
+          </div>
+          <div class="guide-card-content">
+            <h3>The Culinary Quest</h3>
+            <p>Indulge in a sensory journey through historical street vendors, tea corners, and sweet houses.</p>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <span class="guide-step-num">1</span>
+                <span class="guide-step-text"><strong>08:00 AM:</strong> Ram Bhandar for Kachoris and hot Jalebi.</span>
+              </div>
+              <div class="guide-step">
+                <span class="guide-step-num">2</span>
+                <span class="guide-step-text"><strong>12:00 PM:</strong> Refreshing creamy Lassi at Blue Lassi Shop.</span>
+              </div>
+              <div class="guide-step">
+                <span class="guide-step-num">3</span>
+                <span class="guide-step-text"><strong>05:00 PM:</strong> Spicy Tamatar Chaat at Deena Chaat.</span>
+              </div>
+              <div class="guide-step">
+                <span class="guide-step-num">4</span>
+                <span class="guide-step-text"><strong>08:30 PM:</strong> Rabri-Malai dessert & a sweet Banarasi Paan.</span>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-full-width" id="read-guide-culinary">View Food Map</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Have questions about Varanasi, local guides, or want custom directory details? Reach out to us.</p>
+      
+      <div class="contact-grid">
+        <div class="contact-info-panel glass-panel">
+          <h3>OK Varanasi HQ</h3>
+          <p>We work to digitize the oldest living city and connect travelers with authentic local weavers, guides, and services.</p>
+          
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <div class="contact-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+              <div class="contact-text">
+                <h4>Address</h4>
+                <p>Dashashwamedh Ghat Road, Opp. Man Singh Observatory, Varanasi - 221001, UP, India</p>
+              </div>
+            </div>
+            
+            <div class="contact-detail-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone-volume"></i></div>
+              <div class="contact-text">
+                <h4>Helpline & Listing Queries</h4>
+                <p>+91 (542) 240-5511 (Mon - Sat, 9 AM - 6 PM)</p>
+              </div>
+            </div>
+            
+            <div class="contact-detail-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+              <div class="contact-text">
+                <h4>Email Support</h4>
+                <p>explore@okvaranasi.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form-panel glass-panel">
+          <form id="contact-us-form">
+            <div class="form-group">
+              <label for="contact-name">Full Name</label>
+              <input type="text" id="contact-name" class="form-control" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email Address</label>
+              <input type="email" id="contact-email" class="form-control" placeholder="name@domain.com" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" class="form-control" placeholder="Listing support / Travel Query" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" class="form-control" placeholder="Tell us how we can help you..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              Send Message <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-ok">OK</div>
+          <div class="logo-varanasi">VARANASI</div>
+        </a>
+        <p>Your premium digital portal to explore the history, taste the culture, and access services in the sacred city of Varanasi.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-links-col">
+        <h4>Discover</h4>
+        <ul>
+          <li><a href="#places">Sacred Ghats</a></li>
+          <li><a href="#places">Ancient Temples</a></li>
+          <li><a href="#food">Local Delicacies</a></li>
+          <li><a href="#explore">Cultural Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Local Directory</h4>
+        <ul>
+          <li><a href="#directory">Boutique Hotels</a></li>
+          <li><a href="#directory">Authentic Handlooms</a></li>
+          <li><a href="#directory">Certified Guides</a></li>
+          <li><a href="#directory">Yoga Centers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-newsletter">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to receive news about upcoming festivals (Dev Deepawali, Shivratri) and travel advisories.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="Your Email Address" required>
+          <button type="submit" class="btn btn-primary" aria-label="Subscribe"><i class="fa-solid fa-chevron-right"></i></button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <p>&copy; 2026 OK Varanasi. Developed for the local community and global travelers. All Rights Reserved.</p>
+      <p>Designed with <span style="color: var(--color-saffron)">♥</span> in Kashi</p>
+    </div>
   </footer>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
-    const cards = Array.from(document.querySelectorAll('.category'));
+  <!-- ==========================================
+       Modals & Overlays
+       ========================================== */ -->
 
-    function filterCards() {
-      const q = searchInput.value.trim().toLowerCase();
-      cards.forEach(card => {
-        const text = card.dataset.name;
-        card.style.display = !q || text.includes(q) ? '' : 'none';
-      });
-    }
+  <!-- Modal 1: Place Details -->
+  <div class="modal-overlay" id="place-detail-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="place-modal-close" aria-label="Close Modal">&times;</button>
+      <div class="modal-title" id="place-modal-title">Place Details</div>
+      <div id="place-modal-body">
+        <!-- Loaded dynamically by JS -->
+      </div>
+    </div>
+  </div>
 
-    searchBtn.addEventListener('click', filterCards);
-    searchInput.addEventListener('input', filterCards);
+  <!-- Modal 2: Add Business Listing Form -->
+  <div class="modal-overlay" id="add-business-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="business-modal-close" aria-label="Close Modal">&times;</button>
+      <div class="modal-title"><i class="fa-solid fa-store" style="color: var(--color-cyan-glow)"></i> Add Your Local Business</div>
+      <form id="add-business-form">
+        <div class="form-group">
+          <label for="biz-name">Business Name *</label>
+          <input type="text" id="biz-name" class="form-control" placeholder="e.g., Banaras Handloom Weavers Coop" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="biz-category">Category *</label>
+          <select id="biz-category" class="form-control" required>
+            <option value="" disabled selected>Select a business category</option>
+            <option value="hotels">Hotel / Accommodation</option>
+            <option value="food">Restaurant / Cafe / Food Joint</option>
+            <option value="handlooms">Handloom & Crafts Store</option>
+            <option value="guides">Travel Agency / Local Guide</option>
+            <option value="wellness">Yoga & Meditation Center</option>
+          </select>
+        </div>
 
-    const grid = document.getElementById('categoryGrid');
-    const items = Array.from(grid.children);
-    items.sort(() => Math.random() - 0.5).forEach(item => grid.appendChild(item));
-  </script>
+        <div class="form-group">
+          <label for="biz-tag">Short Subtitle / Tag *</label>
+          <input type="text" id="biz-tag" class="form-control" placeholder="e.g., Authentic Silk Sarees or 5-Star Luxury Resort" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="biz-phone">Phone Number *</label>
+          <input type="tel" id="biz-phone" class="form-control" placeholder="e.g., +91 98765 43210" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="biz-email">Email Address</label>
+          <input type="email" id="biz-email" class="form-control" placeholder="contact@business.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="biz-address">Physical Address *</label>
+          <input type="text" id="biz-address" class="form-control" placeholder="e.g., Godowlia Crossing, Varanasi" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="biz-desc">Short Description *</label>
+          <textarea id="biz-desc" class="form-control" placeholder="Describe the products, services, or specialty of your business..." required></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%">
+          Submit Business Listing <i class="fa-solid fa-circle-check"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div class="toast-notification" id="toast-notify">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-text">Action successful!</span>
+  </div>
+
+  <!-- App Logic script -->
+  <script src="app.js"></script>
 </body>
 </html>
