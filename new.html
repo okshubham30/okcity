@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OK Varanasi | Updates</title>
+  <meta name="description" content="Latest updates, launches, events, tourism news, and developments happening in Varanasi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Outfit',sans-serif;
+    }
+
+    :root{
+      --bg:#060e1a;
+      --bg2:#0a192f;
+      --card:#15253d;
+      --card2:#1a2f4c;
+      --text:#f4f6f9;
+      --muted:#8a95ac;
+      --cyan:#00f2fe;
+      --saffron:#ff6b08;
+      --gold:#ffd56b;
+      --border:rgba(0,242,254,0.16);
+      --shadow:0 18px 45px rgba(0,0,0,0.35);
+      --header-bg:rgba(6,14,26,0.86);
+    }
+
+    body.light{
+      --bg:#f4f7fb;
+      --bg2:#ffffff;
+      --card:#ffffff;
+      --card2:#f7fbff;
+      --text:#10233d;
+      --muted:#5f6f87;
+      --cyan:#0066ff;
+      --saffron:#ff7a1a;
+      --gold:#b8860b;
+      --border:rgba(0,102,255,0.16);
+      --shadow:0 18px 45px rgba(20,40,80,0.10);
+      --header-bg:rgba(244,247,251,0.88);
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:
+        radial-gradient(circle at top, rgba(0,242,254,0.10), transparent 35%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      color:var(--text);
+      overflow-x:hidden;
+      transition:background 0.35s ease, color 0.35s ease;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      width:min(1200px,92%);
+      margin:auto;
+    }
+
+    .header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:var(--header-bg);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:16px 0;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .logo-ok{
+      font-size:2rem;
+      font-weight:800;
+      line-height:1;
+    }
+
+    .logo-varanasi{
+      display:flex;
+      flex-direction:column;
+      font-size:1rem;
+      font-weight:800;
+      color:var(--cyan);
+      letter-spacing:2px;
+      text-transform:uppercase;
+      border-left:2px solid var(--saffron);
+      padding-left:10px;
+      line-height:1.05;
+    }
+
+    .logo-varanasi span{
+      color:var(--saffron);
+      font-size:0.62rem;
+      letter-spacing:1px;
+      margin-top:2px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav-links a{
+      padding:10px 14px;
+      border-radius:999px;
+      color:var(--text);
+      font-weight:600;
+      opacity:0.86;
+      transition:0.25s ease;
+      border:1px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:var(--cyan);
+      opacity:1;
+      border-color:var(--border);
+      background:rgba(255,255,255,0.03);
+    }
+
+    .icon-btn{
+      width:42px;
+      height:42px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      color:var(--text);
+      border-radius:14px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:var(--shadow);
+      transition:0.25s ease;
+    }
+
+    .icon-btn:hover{
+      transform:translateY(-2px);
+      border-color:var(--cyan);
+    }
+
+    .hero{
+      padding:80px 0 34px;
+      text-align:center;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,107,8,0.12);
+      border:1px solid rgba(255,107,8,0.25);
+      color:var(--gold);
+      margin-bottom:18px;
+      box-shadow:var(--shadow);
+      font-size:0.92rem;
+    }
+
+    .hero h1{
+      font-family:'Marcellus',serif;
+      font-size:clamp(2.2rem,5vw,4.1rem);
+      line-height:1.05;
+      margin-bottom:14px;
+    }
+
+    .hero p{
+      max-width:780px;
+      margin:0 auto;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:1.02rem;
+    }
+
+    .toolbar{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:1.5fr auto;
+      gap:14px;
+      align-items:center;
+    }
+
+    .search-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--border);
+      padding:14px 18px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+    }
+
+    .search-wrap i{
+      color:var(--muted);
+    }
+
+    .search-wrap input{
+      width:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:1rem;
+    }
+
+    .search-wrap input::placeholder{
+      color:var(--muted);
+    }
+
+    .sort-btn{
+      padding:14px 18px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      color:var(--text);
+      cursor:pointer;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+    }
+
+    .filters{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .filter-btn{
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      color:var(--text);
+      cursor:pointer;
+      transition:0.25s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active{
+      background:linear-gradient(135deg, var(--saffron), var(--cyan));
+      color:#fff;
+      border-color:transparent;
+      transform:translateY(-1px);
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:16px;
+      margin:42px 0 18px;
+      flex-wrap:wrap;
+    }
+
+    .section-head h2{
+      font-family:'Marcellus',serif;
+      font-size:2rem;
+      margin-bottom:6px;
+    }
+
+    .section-head p{
+      color:var(--muted);
+    }
+
+    .anchor-strip{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:14px;
+      margin-bottom:38px;
+    }
+
+    .anchor-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      transition:0.28s ease;
+      min-height:170px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .anchor-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(0,242,254,0.25);
+      background:var(--card2);
+    }
+
+    .anchor-top{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .anchor-icon{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:rgba(0,242,254,0.12);
+      color:var(--cyan);
+      flex:0 0 auto;
+    }
+
+    .anchor-card h3{
+      font-size:1rem;
+      margin-bottom:6px;
+    }
+
+    .anchor-card p{
+      color:var(--muted);
+      line-height:1.55;
+      font-size:0.95rem;
+    }
+
+    .read-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--cyan);
+      font-weight:700;
+      margin-top:12px;
+    }
+
+    .content-block{
+      margin:10px 0 30px;
+      padding:22px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .content-block h3{
+      font-family:'Marcellus',serif;
+      font-size:1.6rem;
+      margin-bottom:10px;
+    }
+
+    .content-block p{
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:14px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .chip{
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--border);
+      color:var(--text);
+      font-size:0.92rem;
+    }
+
+    .updates-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:22px;
+      padding-bottom:56px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:0.28s ease;
+      position:relative;
+      display:block;
+    }
+
+    .card:hover{
+      transform:translateY(-7px);
+      border-color:rgba(0,242,254,0.25);
+      background:var(--card2);
+    }
+
+    .card img{
+      width:100%;
+      aspect-ratio:1 / 1;
+      object-fit:cover;
+      display:block;
+    }
+
+    .card-content{
+      padding:18px;
+    }
+
+    .badge-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(0,242,254,0.12);
+      color:var(--cyan);
+      font-size:0.76rem;
+      letter-spacing:0.6px;
+      font-weight:700;
+    }
+
+    .date{
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+
+    .card h3{
+      font-size:1.2rem;
+      margin-bottom:10px;
+      min-height:54px;
+    }
+
+    .card p{
+      color:var(--muted);
+      line-height:1.65;
+      margin-bottom:14px;
+      min-height:72px;
+    }
+
+    .card-actions{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding-top:14px;
+      border-top:1px solid var(--border);
+      font-size:0.92rem;
+    }
+
+    .meta{
+      color:var(--muted);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .empty{
+      grid-column:1 / -1;
+      text-align:center;
+      padding:42px 18px;
+      border:1px dashed var(--border);
+      border-radius:18px;
+      color:var(--muted);
+      background:rgba(255,255,255,0.03);
+    }
+
+    .footer{
+      border-top:1px solid var(--border);
+      background:rgba(255,255,255,0.02);
+      padding:42px 0 18px;
+      color:var(--muted);
+      margin-top:20px;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:24px;
+      margin-bottom:24px;
+    }
+
+    .footer h3{
+      font-family:'Marcellus',serif;
+      color:var(--text);
+      margin-bottom:12px;
+      font-size:1.35rem;
+    }
+
+    .footer p,
+    .footer a{
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .footer a:hover{
+      color:var(--cyan);
+    }
+
+    .footer-links{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .footer-logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      margin-bottom:12px;
+    }
+
+    .footer-logo .logo-ok{
+      font-size:1.7rem;
+    }
+
+    .footer-logo .logo-varanasi{
+      font-size:0.92rem;
+    }
+
+    .footer-bottom{
+      border-top:1px solid var(--border);
+      padding-top:16px;
+      text-align:center;
+      font-size:0.95rem;
+    }
+
+    .back-top{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:linear-gradient(135deg, var(--saffron), var(--cyan));
+      color:#fff;
+      display:grid;
+      place-items:center;
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(10px);
+      transition:0.25s ease;
+      z-index:999;
+    }
+
+    .back-top.show{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    @media (max-width: 980px){
+      .anchor-strip{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 760px){
+      .nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .toolbar{
+        grid-template-columns:1fr;
+      }
+
+      .anchor-strip{
+        grid-template-columns:1fr;
+      }
+
+      .section-head{
+        align-items:flex-start;
+      }
+
+      .card h3{
+        min-height:auto;
+      }
+
+      .card p{
+        min-height:auto;
+      }
+
+      .card img{
+        aspect-ratio:1 / 1;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo" aria-label="OK Varanasi Home">
+        <div class="logo-ok">OK</div>
+        <div class="logo-varanasi">
+          VARANASI
+          <span>City of Light</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="#updates" class="active">Updates</a>
+        <a href="#quick-links">Quick Links</a>
+        <a href="#contact">Contact</a>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <i class="fa-solid fa-bolt"></i>
+        Latest News & Launches in Varanasi
+      </div>
+
+      <h1>What’s New in Varanasi?</h1>
+
+      <p>
+        Explore fresh updates, new launches, tourism developments, transport news,
+        events, food spots, and city progress — all in one simple and advanced page.
+      </p>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search updates, launches, events, places..." />
+        </div>
+        <button class="sort-btn" id="sortBtn">
+          <i class="fa-solid fa-arrow-down-short-wide"></i> Sort by Latest
+        </button>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="tourism">Tourism</button>
+        <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+        <button class="filter-btn" data-filter="transport">Transport</button>
+        <button class="filter-btn" data-filter="food">Food</button>
+        <button class="filter-btn" data-filter="events">Events</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" id="updates">
+    <section class="section-head">
+      <div>
+        <h2>Quick Anchor Sections</h2>
+        <p>These are clickable sections with anchor tags.</p>
+      </div>
+    </section>
+
+    <section class="anchor-strip" id="quick-links">
+      <a class="anchor-card" href="#tourism-section">
+        <div class="anchor-top">
+          <div class="anchor-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+          <div>
+            <h3>Tourism Section</h3>
+            <p>New visitor spots, cruises, and attractions.</p>
+          </div>
+        </div>
+        <span class="read-link">Open section <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="anchor-card" href="#infrastructure-section">
+        <div class="anchor-top">
+          <div class="anchor-icon"><i class="fa-solid fa-road"></i></div>
+          <div>
+            <h3>Infrastructure</h3>
+            <p>Road work, ropeway, corridor, and city upgrades.</p>
+          </div>
+        </div>
+        <span class="read-link">Open section <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="anchor-card" href="#food-section">
+        <div class="anchor-top">
+          <div class="anchor-icon"><i class="fa-solid fa-utensils"></i></div>
+          <div>
+            <h3>Food & Local Launches</h3>
+            <p>Banarasi food street, cafes, and new openings.</p>
+          </div>
+        </div>
+        <span class="read-link">Open section <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="anchor-card" href="#events-section">
+        <div class="anchor-top">
+          <div class="anchor-icon"><i class="fa-solid fa-calendar-days"></i></div>
+          <div>
+            <h3>Events & Culture</h3>
+            <p>Festivals, concerts, exhibitions, and city programs.</p>
+          </div>
+        </div>
+        <span class="read-link">Open section <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </section>
+
+    <section id="tourism-section" class="content-block">
+      <h3>Tourism Highlights</h3>
+      <p>
+        Add tourism cards for ropeway updates, Ganga cruise services, heritage walks, improved ghat access,
+        and nearby destination guides. This section is ideal for all visitor-related news.
+      </p>
+      <div class="chips">
+        <span class="chip">Ganga Cruise</span>
+        <span class="chip">Heritage Walk</span>
+        <span class="chip">Smart Tourist Route</span>
+        <span class="chip">New Ghat Viewpoints</span>
+      </div>
+    </section>
+
+    <section id="infrastructure-section" class="content-block">
+      <h3>Infrastructure & Development</h3>
+      <p>
+        Put updates about flyovers, road widening, corridor improvements, parking zones, ropeway work,
+        drainage, beautification, and smart city projects.
+      </p>
+      <div class="chips">
+        <span class="chip">Ropeway Project</span>
+        <span class="chip">Road Expansion</span>
+        <span class="chip">Smart City</span>
+        <span class="chip">Corridor Development</span>
+      </div>
+    </section>
+
+    <section id="food-section" class="content-block">
+      <h3>Food & Local Launches</h3>
+      <p>
+        Add new food street openings, Banarasi cafe launches, thali places, sweets, lassi shops,
+        and trendy local spots in the city.
+      </p>
+      <div class="chips">
+        <span class="chip">Banarasi Food Street</span>
+        <span class="chip">New Cafe Launch</span>
+        <span class="chip">Street Food</span>
+        <span class="chip">Dessert Spots</span>
+      </div>
+    </section>
+
+    <section id="events-section" class="content-block">
+      <h3>Events & Culture</h3>
+      <p>
+        This section is perfect for festivals, cultural programs, museum launches, college events,
+        music nights, and temple celebrations.
+      </p>
+      <div class="chips">
+        <span class="chip">Ganga Aarti Special</span>
+        <span class="chip">Festival Updates</span>
+        <span class="chip">College Events</span>
+        <span class="chip">Concerts</span>
+      </div>
+    </section>
+
+    <section class="section-head">
+      <div>
+        <h2>Latest Update Cards</h2>
+        <p>Search, filter, and open every card using a clickable link.</p>
+      </div>
+    </section>
+
+    <section class="updates-grid" id="updatesGrid"></section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="footer-logo" aria-label="OK Varanasi Home">
+            <div class="logo-ok">OK</div>
+            <div class="logo-varanasi">
+              VARANASI
+              <span>City of Light</span>
+            </div>
+          </a>
+          <p>
+            A modern city portal for Varanasi updates, launches, tourist news, food spots,
+            cultural events, and local development.
+          </p>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="#updates">Updates</a>
+            <a href="#quick-links">Sections</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <p>Email: contact@okvaranasi.com</p>
+          <p>Phone: +91 542 240 5511</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> OK Varanasi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="back-top" id="backTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </a>
+
+  <script>
+    const UPDATES = [
+      {
+        title: "Ropeway Project Near Completion",
+        category: "infrastructure",
+        label: "Infrastructure",
+        date: "June 2026",
+        order: 1,
+        image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+        description: "A major ropeway project is moving quickly and may improve daily travel and tourist movement in Varanasi.",
+        link: "updates/ropeway-project.html",
+        meta: "City transport upgrade"
+      },
+      {
+        title: "New Ganga Cruise Experience",
+        category: "tourism",
+        label: "Tourism",
+        date: "June 2026",
+        order: 2,
+        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80",
+        description: "A new cruise experience is making river visits more premium, scenic, and tourist-friendly.",
+        link: "updates/ganga-cruise.html",
+        meta: "Tourist attraction"
+      },
+      {
+        title: "Banarasi Food Street Buzz",
+        category: "food",
+        label: "Food",
+        date: "May 2026",
+        order: 3,
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=80",
+        description: "A new food zone is creating excitement with chaat, lassi, sweets, snacks, and local flavours.",
+        link: "updates/food-street.html",
+        meta: "Street food launch"
+      },
+      {
+        title: "Kashi Corridor Beautification",
+        category: "infrastructure",
+        label: "Development",
+        date: "May 2026",
+        order: 4,
+        image: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80",
+        description: "More beautification and visitor-friendly improvements are being added around the sacred corridor area.",
+        link: "updates/kashi-corridor.html",
+        meta: "Temple area improvement"
+      },
+      {
+        title: "Festival Season Events Added",
+        category: "events",
+        label: "Events",
+        date: "April 2026",
+        order: 5,
+        image: "https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&w=1200&q=80",
+        description: "Cultural events, devotional programs, and city celebrations are being added for visitors and locals.",
+        link: "updates/events-calendar.html",
+        meta: "Cultural calendar"
+      },
+      {
+        title: "Smart Parking Near Tourist Zones",
+        category: "transport",
+        label: "Transport",
+        date: "April 2026",
+        order: 6,
+        image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+        description: "New parking arrangements are helping tourists and local people near busy areas and ghats.",
+        link: "updates/smart-parking.html",
+        meta: "Traffic convenience"
+      },
+      {
+        title: "New Cafe Opened Near Assi Ghat",
+        category: "food",
+        label: "Food",
+        date: "March 2026",
+        order: 7,
+        image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
+        description: "A trendy new cafe has opened with river-facing vibes, snacks, coffee, and youth-friendly seating.",
+        link: "updates/new-cafe.html",
+        meta: "Cafe launch"
+      },
+      {
+        title: "Tourist Walk Route Improved",
+        category: "tourism",
+        label: "Tourism",
+        date: "March 2026",
+        order: 8,
+        image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=80",
+        description: "A cleaner and easier walking route is being improved for visitors exploring old Varanasi.",
+        link: "updates/walk-route.html",
+        meta: "Visitor route"
+      }
+    ];
+
+    const grid = document.getElementById("updatesGrid");
+    const searchInput = document.getElementById("searchInput");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const themeToggle = document.getElementById("themeToggle");
+    const sortBtn = document.getElementById("sortBtn");
+    const year = document.getElementById("year");
+    const backTop = document.getElementById("backTop");
+
+    let activeFilter = "all";
+    let sortDesc = true;
+
+    year.textContent = new Date().getFullYear();
+
+    function renderCards(list){
+      grid.innerHTML = "";
+
+      if(!list.length){
+        grid.innerHTML = `
+          <div class="empty">
+            No updates found. Try another search or category.
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(item => {
+        const card = document.createElement("a");
+        card.className = "card";
+        card.href = item.link;
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.title}">
+          <div class="card-content">
+            <div class="badge-row">
+              <span class="badge"><i class="fa-solid fa-tag"></i> ${item.label}</span>
+              <span class="date">${item.date}</span>
+            </div>
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <div class="card-actions">
+              <span class="read-link">Read More <i class="fa-solid fa-arrow-right"></i></span>
+              <span class="meta"><i class="fa-solid fa-circle-dot"></i> ${item.meta}</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterAndSearch(){
+      const q = searchInput.value.trim().toLowerCase();
+
+      let filtered = UPDATES.filter(item => {
+        const matchesText =
+          item.title.toLowerCase().includes(q) ||
+          item.description.toLowerCase().includes(q) ||
+          item.label.toLowerCase().includes(q) ||
+          item.meta.toLowerCase().includes(q) ||
+          item.category.toLowerCase().includes(q);
+
+        const matchesCategory = activeFilter === "all" || item.category === activeFilter;
+        return matchesText && matchesCategory;
+      });
+
+      filtered.sort((a, b) => {
+        return sortDesc ? a.order - b.order : b.order - a.order;
+      });
+
+      renderCards(filtered);
+    }
+
+    searchInput.addEventListener("input", filterAndSearch);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        filterAndSearch();
+      });
+    });
+
+    sortBtn.addEventListener("click", () => {
+      sortDesc = !sortDesc;
+      sortBtn.innerHTML = sortDesc
+        ? '<i class="fa-solid fa-arrow-down-short-wide"></i> Sort by Latest'
+        : '<i class="fa-solid fa-arrow-up-wide-short"></i> Sort by Oldest';
+      filterAndSearch();
+    });
+
+    function applyTheme(theme){
+      document.body.classList.toggle("light", theme === "light");
+      themeToggle.innerHTML = theme === "light"
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+      localStorage.setItem("okvaranasi-theme", theme);
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const isLight = document.body.classList.contains("light");
+      applyTheme(isLight ? "dark" : "light");
+    });
+
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 350){
+        backTop.classList.add("show");
+      }else{
+        backTop.classList.remove("show");
+      }
+    });
+
+    const savedTheme = localStorage.getItem("okvaranasi-theme") || "dark";
+    applyTheme(savedTheme);
+
+    renderCards(UPDATES);
+  </script>
+</body>
+</html>
