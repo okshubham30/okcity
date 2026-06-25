@@ -196,18 +196,6 @@ const INITIAL_DIRECTORY = [
     email: "tours@kashiheritagetravels.com",
     address: "Dashashwamedh Crossing, Varanasi",
     desc: "Guided historical walks led by local scholars. Discover hidden alleyway temples, historical lore, secret craft quarters, and twilight boat rides."
-  },
-  {
-    id: "satyam-yoga",
-    name: "Satyam Yoga Ashram",
-    category: "wellness",
-    tag: "Ganga Riverside Meditation",
-    rating: 4.6,
-    reviewsCount: 104,
-    phone: "+91 542 231 0987",
-    email: "yoga@satyamashram.org",
-    address: "Shivala Ghat, Varanasi",
-    desc: "Traditional yoga and Vedic studies center overlooking the river. Offers sunrise Hatha yoga classes, sound healing sessions, and residential meditation retreats."
   }
 ];
 
