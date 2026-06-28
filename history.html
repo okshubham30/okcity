@@ -711,49 +711,28 @@
   </footer>
 
   <script>
-    const themeToggle = document.getElementById("themeToggle");
-
-    function applyTheme(theme) {
-      document.body.classList.toggle("light", theme === "light");
-      themeToggle.innerHTML = theme === "light"
-        ? '<i class="fa-solid fa-sun"></i>'
-        : '<i class="fa-solid fa-moon"></i>';
-      localStorage.setItem("okvaranasi-theme", theme);
-    }
-
-    themeToggle.addEventListener("click", () => {
-      const isLight = document.body.classList.contains("light");
-      applyTheme(isLight ? "dark" : "light");
-    });
-
-    const savedTheme = localStorage.getItem("okvaranasi-theme") || "dark";
-    applyTheme(savedTheme);
-  </script>
-<script>
-    const themeToggle = document.getElementById("themeToggle");
-
-    function applyTheme(theme) {
-      const isLight = theme === "light";
-      document.body.classList.toggle("light", isLight);
+    if (!window.__okThemeInitialized) {
+      window.__okThemeInitialized = true;
+      const themeToggle = document.getElementById("themeToggle");
 
       if (themeToggle) {
-        themeToggle.innerHTML = isLight
-          ? '<i class="fa-solid fa-sun"></i>'
-          : '<i class="fa-solid fa-moon"></i>';
+        function applyTheme(theme) {
+          document.body.classList.toggle("light", theme === "light");
+          themeToggle.innerHTML = theme === "light"
+            ? '<i class="fa-solid fa-sun"></i>'
+            : '<i class="fa-solid fa-moon"></i>';
+          localStorage.setItem("okvaranasi-theme", theme);
+        }
+
+        themeToggle.addEventListener("click", () => {
+          const isLight = document.body.classList.contains("light");
+          applyTheme(isLight ? "dark" : "light");
+        });
+
+        const savedTheme = localStorage.getItem("okvaranasi-theme") || "dark";
+        applyTheme(savedTheme);
       }
-
-      localStorage.setItem("okvaranasi-theme", theme);
     }
-
-    if (themeToggle) {
-      themeToggle.addEventListener("click", () => {
-        const isLight = document.body.classList.contains("light");
-        applyTheme(isLight ? "dark" : "light");
-      });
-    }
-
-    const savedTheme = localStorage.getItem("okvaranasi-theme") || "dark";
-    applyTheme(savedTheme);
   </script>
 </body>
 </html>
