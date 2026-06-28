@@ -137,66 +137,7 @@ const INITIAL_DIRECTORY = [
     address: "Darbhanga Ghat, Varanasi",
     desc: "A boutique heritage hotel built in 1812. Located directly on the banks of Ganga, offering breathtaking views, classic architecture, and live sitar concerts every evening."
   },
-  {
-    id: "taj-nadesar",
-    name: "Taj Nadesar Palace",
-    category: "hotels",
-    tag: "5-Star Royal Retreat",
-    rating: 4.8,
-    reviewsCount: 184,
-    phone: "+91 542 666 0000",
-    email: "nadesar.varanasi@tajhotels.com",
-    address: "Nadesar Palace Grounds, Varanasi",
-    desc: "Nestled amidst lush greenery and fields of jasmine, this palace has hosted royalty and celebrities. Features ultimate luxury, local spa therapies, and organic dining."
-  },
-  {
-    id: "blue-lassi",
-    name: "Blue Lassi Shop",
-    category: "food",
-    tag: "80-Year-Old Legendary Joint",
-    rating: 4.7,
-    reviewsCount: 1540,
-    phone: "+91 98392 45612",
-    email: "explore@bluelassi.com",
-    address: "Kachori Gali, Chowk, Varanasi",
-    desc: "World-famous artisanal lassi shop serving over 50 fresh varieties of yogurt drinks whipped in earthenware cups and topped with rich fruit chunks and thick cream."
-  },
-  {
-    id: "vaatika-cafe",
-    name: "Pizzeria Vaatika Cafe",
-    category: "food",
-    tag: "Riverside Garden Cafe",
-    rating: 4.5,
-    reviewsCount: 820,
-    phone: "+91 542 231 1138",
-    email: "info@vaatika.com",
-    address: "Assi Ghat, Varanasi",
-    desc: "Iconic garden cafe directly overlooking Assi Ghat. Famous for introducing wood-fired Italian pizzas, freshly baked apple pies, and premium tea options in Banaras."
-  },
-  {
-    id: "banaras-weaves",
-    name: "Banaras Weaves Co-op",
-    category: "handlooms",
-    tag: "Authentic Handloom Silks",
-    rating: 4.9,
-    reviewsCount: 220,
-    phone: "+91 94152 23412",
-    email: "contact@banarasweaves.org",
-    address: "Jaitpura Silk District, Varanasi",
-    desc: "A cooperative association linking local weaver families directly with customers. Authentic silk sarees, brocades, hand-woven dupattas, and designer fabrics."
-  },
-  {
-    id: "kashi-tours",
-    name: "Kashi Heritage Walks",
-    category: "guides",
-    tag: "Government Approved Tour Agency",
-    rating: 4.7,
-    reviewsCount: 165,
-    phone: "+91 98897 12345",
-    email: "tours@kashiheritagetravels.com",
-    address: "Dashashwamedh Crossing, Varanasi",
-    desc: "Guided historical walks led by local scholars. Discover hidden alleyway temples, historical lore, secret craft quarters, and twilight boat rides."
-  }
+
 ];
 
 const FOOD_SHOWCASE_DATA = {
@@ -226,11 +167,18 @@ const FOOD_SHOWCASE_DATA = {
 let currentPlaces = [...PLACES_DATA];
 let currentDirectory = [];
 
-// Initialize LocalStorage for Listings
-if (!localStorage.getItem("okvaranasi_listings")) {
-  localStorage.setItem("okvaranasi_listings", JSON.stringify(INITIAL_DIRECTORY));
-}
-currentDirectory = JSON.parse(localStorage.getItem("okvaranasi_listings"));
+/* ==========================================
+   DIRECTORY DATA INITIALIZATION
+   ========================================== */
+
+// Always load the latest data from app.js
+currentDirectory = [...INITIAL_DIRECTORY];
+
+// Optional: keep a copy in LocalStorage (for debugging)
+localStorage.setItem(
+  "okvaranasi_listings",
+  JSON.stringify(currentDirectory)
+);
 
 // Dom Elements
 const header = document.getElementById("main-header");
@@ -767,9 +715,14 @@ function handleAddBusiness(e) {
     desc: bizDesc
   };
   
-  // Save to list & local storage
   currentDirectory.unshift(newListing);
-  localStorage.setItem("okvaranasi_listings", JSON.stringify(currentDirectory));
+
+currentDirectory.unshift(newListing);
+
+// Temporary (Development Mode)
+// After integrating PHP, send this data to your PHP API instead.
+renderDirectory(currentCategory, dirSearchInput.value);
+updateCounters();
   
   // Reset Form and close modal
   addBusinessForm.reset();
